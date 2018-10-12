@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miautastic", "Assembly-CSharp-firstpass.csproj", "{21485190-9468-6894-8702-8C240AEEF71A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miautastic", "Assembly-CSharp.csproj", "{E192418D-CAA7-AEC4-6E55-257030163173}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miautastic", "Assembly-CSharp-Editor-firstpass.csproj", "{507BE5DF-37CB-AD26-B77F-11BB85A96B6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21485190-9468-6894-8702-8C240AEEF71A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21485190-9468-6894-8702-8C240AEEF71A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21485190-9468-6894-8702-8C240AEEF71A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21485190-9468-6894-8702-8C240AEEF71A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E192418D-CAA7-AEC4-6E55-257030163173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E192418D-CAA7-AEC4-6E55-257030163173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E192418D-CAA7-AEC4-6E55-257030163173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E192418D-CAA7-AEC4-6E55-257030163173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{507BE5DF-37CB-AD26-B77F-11BB85A96B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{507BE5DF-37CB-AD26-B77F-11BB85A96B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{507BE5DF-37CB-AD26-B77F-11BB85A96B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{507BE5DF-37CB-AD26-B77F-11BB85A96B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
