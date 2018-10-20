@@ -52,12 +52,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Gameplay\Scripts\CatHolder.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\DropHolder.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\Enums.cs" />
      <Compile Include="Assets\Gameplay\Scripts\GameplayManager.cs" />
      <Compile Include="Assets\Gameplay\Scripts\GameplayPrefabs.cs" />
      <Compile Include="Assets\Gameplay\Scripts\Installers\GameplayInstaller.cs" />
      <Compile Include="Assets\Gameplay\Scripts\Movement.cs" />
      <Compile Include="Assets\Gameplay\Scripts\Movement2.cs" />
-     <Compile Include="Assets\Gameplay\Scripts\ShitHolder.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\MovementDrop.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\Shaders\BoxBlur.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\Shaders\CustomImageEffect.cs" />
      <Compile Include="Assets\Menu\Scripts\GameManager\GameStateFactory.cs" />
      <Compile Include="Assets\Menu\Scripts\GameManager\Helper\AsyncProcessor.cs" />
      <Compile Include="Assets\Menu\Scripts\GameManager\States\GameOverState.cs" />
@@ -69,6 +73,9 @@
      <Compile Include="Assets\Menu\Scripts\Installers\GameManager.cs" />
      <Compile Include="Assets\Menu\Scripts\Installers\GameSettingsInstaller.cs" />
      <Compile Include="Assets\Menu\Scripts\UI\StateChangeManager.cs" />
+     <None Include="Assets\Gameplay\Scripts\Shaders\BlurImageEffect.shader" />
+     <None Include="Assets\Gameplay\Scripts\Shaders\UVOffsetsImageEffect.shader" />
+     <None Include="Assets\Gameplay\Scripts\Shaders\ImageEffect.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

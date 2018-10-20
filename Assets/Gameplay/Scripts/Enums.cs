@@ -1,0 +1,1 @@
+﻿public enum State { PLAY, GAMEOVER };

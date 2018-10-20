@@ -44,11 +44,17 @@ TagManager:
   - name: Background
     uniqueID: 2851786109
     locked: 0
-  - name: Shit
+  - name: Content
+    uniqueID: 333017385
+    locked: 0
+  - name: Drop
     uniqueID: 3535636777
     locked: 0
   - name: Cats
     uniqueID: 1247425935
+    locked: 0
+  - name: DropActivated
+    uniqueID: 1759238111
     locked: 0
   - name: Board
     uniqueID: 1145878725

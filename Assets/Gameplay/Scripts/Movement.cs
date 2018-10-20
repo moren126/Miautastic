@@ -19,8 +19,8 @@ public class Movement : MonoBehaviour {
 	//private float waitCounter = 1;
 	private Vector2 wanderVel;
 	//private Vector2 awoidWallsVel;
-	private float shitTime;
-	private float shitCounter;
+	private float dropTime;
+	private float dropCounter;
 
 	private int walkDirection;
 
@@ -43,8 +43,8 @@ public class Movement : MonoBehaviour {
 
 		walkCounter = walkTime;
 
-		shitTime = Random.value * 20f;
-		shitCounter = shitTime;
+		dropTime = Random.value * 20f;
+		dropCounter = dropTime;
 
 		StartWalking ();
 
@@ -108,96 +108,29 @@ public class Movement : MonoBehaviour {
 
 	void Update() {
 
-		/*
-		if (isChangingDirection) {
-			walkCounter -= Time.deltaTime;
-			//myRigidbody.velocity = moveVel;
+		if (gameplayManager.GState == State.PLAY) {
 
-			if (walkCounter < 0) {
-				StopWalking ();
-			}
+			dropCounter -= Time.deltaTime;
 
-		} else {
-			//waitCounter -= Time.deltaTime;
-			//myRigidbody.velocity = Vector2.zero;
-
-			//if (waitCounter < 0) {
-			wanderVel = Seek (GetTargetPosition ());
-				//myRigidbody.velocity = moveVel;
-
-			StartWalking ();
-			//}
-		}
-		*/
-
-		shitCounter -= Time.deltaTime;
-
-		if (shitCounter < 0) {
-			gameplayManager.CreateShit (new Vector2(transform.position.x, transform.position.y));
-			shitCounter = shitTime;
-		}
-
-
-		wanderVel = Wander ();
-
-		myRigidbody.velocity = wanderVel;
-		myRigidbody.velocity += AwoidWalls ();
-
-		/*
-		if (isWalking) {
-			walkCounter -= Time.deltaTime;
-
-			switch (walkDirection) {
-			case 0:
-				myRigidbody.velocity = new Vector2 (0, maxSpeed);
-				if (hasBoard && transform.position.y > maxWalkPoint.y) {
-					StopWalking ();
-					myRigidbody.velocity = new Vector2 (0, -maxSpeed);
-					ChooseSpecifiedDirection ();
-				}
-				break;
-			case 1:
-				myRigidbody.velocity = new Vector2 (maxSpeed, 0);
-				if (hasBoard && transform.position.x > maxWalkPoint.x) {
-					StopWalking ();
-					myRigidbody.velocity = new Vector2 (-maxSpeed, 0);
-					ChooseSpecifiedDirection ();
-				}
-				break;
-			case 2:
-				myRigidbody.velocity = new Vector2 (0, -maxSpeed);
-				if (hasBoard && transform.position.y < minWalkPoint.y) {
-					StopWalking ();
-					myRigidbody.velocity = new Vector2 (0, maxSpeed);
-					ChooseSpecifiedDirection ();
-				}
-				break;
-			case 3:
-				myRigidbody.velocity = new Vector2 (-maxSpeed, 0);
-				if (hasBoard && transform.position.x < minWalkPoint.x) {
-					StopWalking ();
-					myRigidbody.velocity = new Vector2 (maxSpeed, 0);
-					ChooseSpecifiedDirection ();
-				}
-				break;
-			}
-
-			if (walkCounter < 0) {
-				StopWalking ();
+			if (dropCounter < 0) {
+				gameplayManager.CreateDrop (new Vector2 (transform.position.x, transform.position.y));
+				dropCounter = dropTime;
 			}
 
 
-		} else {
-			waitCounter -= Time.deltaTime;
+			wanderVel = Wander ();
 
-			myRigidbody.velocity = Vector2.zero;
-
-			if (waitCounter < 0)
-				ChooseDirection ();
+			myRigidbody.velocity = wanderVel;
+			myRigidbody.velocity += AwoidWalls ();
 
 		}
-		*/
-			
+
+		if (gameplayManager.GState == State.GAMEOVER) {
+			float vectorXTemp = myRigidbody.velocity.x / 10;
+			float vectorYTemp = myRigidbody.velocity.y / 10;
+			myRigidbody.velocity = new Vector2 (vectorXTemp, vectorYTemp);
+		}
+	
 	}
 
 	/*

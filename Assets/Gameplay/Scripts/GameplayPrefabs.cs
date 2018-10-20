@@ -3,13 +3,13 @@
 public class GameplayPrefabs : MonoBehaviour {
 
 	[SerializeField] private GameObject catPrefab;
-	[SerializeField] private GameObject normalShitPrefab;
+	[SerializeField] private GameObject normalDropPrefab;
 
 	public GameObject CatPrefab {
 		get { return catPrefab; }
 	}
 
-	public GameObject NormalShitPrefab {
-		get { return normalShitPrefab; }
+	public GameObject NormalDropPrefab {
+		get { return normalDropPrefab; }
 	}
 }
