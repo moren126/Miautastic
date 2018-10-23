@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Zenject;
+using UnityEngine.SceneManagement;
 
 namespace FSM.GameManager.States {
 
@@ -11,6 +12,7 @@ namespace FSM.GameManager.States {
 
 		public override void Start() {
 			Debug.Log ("MenuState Started");
+			SceneManager.LoadScene ("gameplay");
 		}
 
 		public override void Tick() {}

@@ -15,7 +15,7 @@ namespace FSM.GameManager {
 		[SerializeField]
 		private GameState _previousGameState;
 
-		public Text stateText;
+		//public Text stateText;
 
 		[Inject]
 		public void Construct(GameStateFactory gameStateFactory) {
@@ -26,19 +26,24 @@ namespace FSM.GameManager {
 			ChangeState (GameState.Menu);
 		}
 		
-		internal void ChangeState(GameState gameState) {
-			if (_gameStateEntity != null) {
-				_gameStateEntity.Dispose ();
-				_gameStateEntity = null;
+		internal void ChangeState(GameState gameState, bool wasClick = false) {
+
+			if (wasClick) {
+
+				if (_gameStateEntity != null) {
+					_gameStateEntity.Dispose ();
+					_gameStateEntity = null;
+				}
+
+				_previousGameState = _currentGameState;
+				_currentGameState = gameState;
+
+				//stateText.text = gameState.ToString ();
+
+				_gameStateEntity = _gameStateFactory.CreateState (gameState);
+				_gameStateEntity.Start ();
+
 			}
-
-			_previousGameState = _currentGameState;
-			_currentGameState = gameState;
-
-			stateText.text = gameState.ToString ();
-
-			_gameStateEntity = _gameStateFactory.CreateState (gameState);
-			_gameStateEntity.Start ();
 		}
 	}
 
