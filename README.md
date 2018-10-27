@@ -1,7 +1,13 @@
 # Miautastic
 
-Devtober attempt. I don't know if it gonna change to anything normal soon. For now it's game about cats 
+Devtober attempt used as an opportunity for learning Zenject framework. It's mini arcade game where you pick up dead mice by left mouse button. Make sure there are not too many of them on board. 
 
-and 【﻿ａｅｓｔｈｅｔｉｃ】 And opportunity for learning more Zenject. 
+Esthetics inspired by Rau's video clip for 'Mistrz Sztuki' and dieback of 【﻿Ｖａｐｏｒｗａｖｅ】 
 
 ![alt text](screenshots/mrau.png "mrau")
+
+Project uses Unity 2017.3.0, Zenject and TextMesh Pro asset.
+
+Catalog with executable files for Windows systems available down below:
+
+https://my.pcloud.com/publink/show?code=XZJQ397ZTihzyfqnitjFq3rP86E8eSLz7iWX

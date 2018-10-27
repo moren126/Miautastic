@@ -1,61 +1,112 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class GameplayManager : MonoBehaviour {
+namespace Miautastic.Gameplay {
 
-	//[SerializeField] private GameObject normalShitPrefab;
+	public class GameplayManager : MonoBehaviour {
 
-	[SerializeField] private int gameOverValue = 10;
-	[SerializeField] private AudioSource audioSource;
+		#region SerializeFields
+		[SerializeField] private int gameOverValue = 20;
+		[SerializeField] private AudioSource audioSource;
+		[SerializeField] private Canvas canvasOther;
+		#endregion
 
-	private GameplayPrefabs gameplayPrefabs;
-	private DropHolder dropHolder;
+		private DropHolder dropHolder;
+		private DolphinHolder dolphinHolder;
+		private Drop.Factory dropfactory;
+		private State gameplayState;
 
-	private State gState;
+		private static GameplayManager instance;
 
-	public State GState {
-		get { return gState; }
-	}
-
-	[Inject]
-	private void Construct (GameplayPrefabs _gameplayPrefabs, DropHolder _dropHolder) {
-		gameplayPrefabs = _gameplayPrefabs;
-		dropHolder = _dropHolder;
-	}
-
-	private void Start() {
-		gState = State.PLAY;
-	}
-
-	private Vector2 DrawPosition() {
-		return Vector2.zero;
-	}
-
-	public void CreateDrop(Vector2 position) {
-
-		if (gState == State.PLAY) {
-
-			GameObject drop = (GameObject)Instantiate (gameplayPrefabs.NormalDropPrefab, transform.position, Quaternion.identity);
-			drop.GetComponent<RectTransform> ().SetParent (dropHolder.transform, true);
-			drop.GetComponent<RectTransform> ().anchoredPosition = position;
-			drop.GetComponent<RectTransform> ().localScale = new Vector3 (4f, 4f);//(0.3f, 0.3f);
-
-			dropHolder.AddDrop (drop);
-
-			if (dropHolder.GetDropCount >= gameOverValue) {
-				Debug.Log (dropHolder.GetDropCount);
-
-				gState = State.GAMEOVER;
-
-				dropHolder.ActivateDrops ();
-
-				audioSource.pitch = -0.8f;
-				//audioSource.Stop ();
-			}
-
+		#region Properties
+		public State GameplayState {
+			get { return gameplayState; }
 		}
+			
+		public DropHolder DropHolder {
+			get { return dropHolder; }
+		}
+
+		public int GameOverValue {
+			get { return gameOverValue; }
+		}
+			
+		public static GameplayManager Instance {
+			get {
+				if (instance == null)
+					instance = FindObjectOfType<GameplayManager> ();
+				return instance;
+			}
+		}
+		#endregion
+
+		#region Inject
+		[Inject]
+		private void Construct (DropHolder dropHolder, DolphinHolder dolphinHolder, Drop.Factory dropfactory) {
+			this.dropHolder = dropHolder;
+			this.dolphinHolder = dolphinHolder;
+			this.dropfactory = dropfactory;
+		}
+		#endregion
+
+		#region MonoBehaviour Methods
+		private void Start() {
+			gameplayState = State.PLAY;
+			canvasOther.gameObject.SetActive (false);
+		}
+		#endregion
+
+		#region Private Methods
+		private IEnumerator ShadersInMotion(float waitTime) {
+
+			yield return new WaitForSeconds (waitTime);
+
+			CustomImageEffect[] imageEffects = Camera.main.GetComponents<CustomImageEffect> ();
+			foreach (var i in imageEffects)
+				i.enabled = true;
+
+			canvasOther.gameObject.SetActive (true);
+		}
+
+		private void GameOverActions() {
+			gameplayState = State.GAMEOVER;
+
+			dropHolder.ActivateDrops ();
+			dolphinHolder.StopAnimations (true);
+
+			audioSource.pitch = -0.8f;
+
+			StartCoroutine(ShadersInMotion (2f));
+
+			if (PlayerPrefs.GetInt ("highscore") == 0) {
+				PlayerPrefs.SetInt ("highscore", dropHolder.GetPoints);
+			} else if (PlayerPrefs.GetInt ("highscore") < dropHolder.GetPoints)
+				PlayerPrefs.SetInt ("highscore", dropHolder.GetPoints);
+		}
+		#endregion
+
+		#region Public Methods 
+		public void CreateDrop(Vector2 position) {
+
+			if (gameplayState == State.PLAY) {
+
+				if (dropHolder.GetDropClickedCount == 0) { 
+
+					Drop drop = dropfactory.Create (position);
+
+					dropHolder.AddDrop (drop.gameObject);
+				} else {
+					dropHolder.AddDropPooling (position);
+				}
+
+				if (dropHolder.GetDropCount >= gameOverValue) {
+					GameOverActions ();
+				}
+
+			}
+		}
+		#endregion
 	}
 
 }

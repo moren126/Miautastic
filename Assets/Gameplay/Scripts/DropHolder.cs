@@ -3,44 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+namespace Miautastic.Gameplay {
 
-public class DropHolder : MonoBehaviour {
+	public class DropHolder : MonoBehaviour {
 
-	//private GameplayPrefabs gameplayPrefabs;
+		[SerializeField] private const int pointValue = 5;
+		private int points;
 
-	private List<GameObject> dropList = new List<GameObject>();
+		private List<GameObject> dropList = new List<GameObject>();
+		private List<GameObject> dropClickedList = new List<GameObject> ();
 
-	#region Properties
-	public int GetDropCount {
-		get { return dropList.Count; }
+		#region Properties
+		public int GetPoints {
+			get { return points; }
+		}
+
+		public int GetDropCount {
+			get { return dropList.Count; }
+		}
+
+		public int GetDropClickedCount {
+			get { return dropClickedList.Count; }
+		}
+		#endregion
+
+		void Start() {
+			points = 0;
+		}
+
+		#region Public Methods 
+		public void AddDrop(GameObject drop) {
+			dropList.Add (drop);
+		}
+
+		public void AddDropPooling(Vector2 position) {
+			if (dropClickedList.Count != 0) {
+				dropClickedList [0].SetActive (true);
+				dropClickedList [0].GetComponent<RectTransform> ().anchoredPosition = position;
+
+				dropList.Add (dropClickedList [0]);
+
+				dropClickedList.RemoveAt (0);
+			} else
+				Debug.Log ("dropClickedList is empty, it shouldn't be");
+		}
+
+		public void RemoveDrop(GameObject drop) {
+			dropList.Remove (drop);
+			dropClickedList.Add (drop);
+
+			points += pointValue;
+		}
+
+		public void ActivateDrops() {
+			foreach (var g in dropList)
+				g.GetComponent<Drop> ().IsActivated = true;
+		}
+		#endregion
+
 	}
-	#endregion
-
-	#region Public Methods 
-	public void AddDrop(GameObject drop) {
-		dropList.Add (drop);
-	}
-
-	public void ActivateDrops() {
-		foreach (var g in dropList)
-			g.GetComponent<MovementDrop> ().IsActivated = true;
-	}
-	#endregion
-
-
-
-	/*
-	[Inject]
-	private void Construct (GameplayPrefabs _gameplayPrefabs) {
-		gameplayPrefabs = _gameplayPrefabs;
-	}
-
-	public void CreateShit(Vector2 position) {
-		GameObject shit = (GameObject)Instantiate (gameplayPrefabs.NormalShitPrefab, transform.position, Quaternion.identity);
-		shit.transform.SetParent (this.transform, true);
-		shit.GetComponent<RectTransform> ().anchoredPosition = position;
-		shit.transform.localScale = new Vector3(1f, 1f);
-	}
-	*/
 
 }

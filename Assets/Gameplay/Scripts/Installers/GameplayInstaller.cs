@@ -1,23 +1,17 @@
 using UnityEngine;
 using Zenject;
 
-public class GameplayInstaller : MonoInstaller<GameplayInstaller> {
-    
-	public override void InstallBindings() {
-		Container.Bind<GameplayPrefabs> ().FromComponentInHierarchy ().AsSingle ();
-		Container.Bind<GameplayManager> ().FromComponentInHierarchy ().AsSingle();
-		Container.Bind<DropHolder> ().FromComponentInHierarchy ().AsSingle ();
-		Container.Bind<CatHolder> ().FromComponentInHierarchy ().AsSingle ();
-		//Container.Bind<Greeter> ().AsSingle().NonLazy ();
-    }
+namespace Miautastic.Gameplay.Installers {
 
+	public class GameplayInstaller : MonoInstaller<GameplayInstaller> {
 
-}
+		public override void InstallBindings() {
+			Container.Bind<DropHolder> ().FromComponentInHierarchy ().AsSingle ();
+			Container.Bind<DolphinHolder>().FromComponentInHierarchy ().AsSingle (); 
 
-/*
-public class Greeter {
-	public Greeter() {
-		Debug.Log ("ELO");
+			Container.BindFactory<Vector2, Drop, Drop.Factory> ().FromFactory<CustomDropFactory> ();
+	    }
+			
 	}
+
 }
-*/

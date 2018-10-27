@@ -1,47 +1,43 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using FSM.GameManager.States;
+using Miautastic.Menu.States;
 
-namespace FSM.GameManager {
+namespace Miautastic.Menu {
 
 	public class GameManager : MonoBehaviour {
 
-		private GameStateFactory _gameStateFactory;
-		private GameStateEntity _gameStateEntity = null;
-
 		[SerializeField]
-		private GameState _currentGameState;
+		private MenuState currentGameState;
 		[SerializeField]
-		private GameState _previousGameState;
+		private MenuState previousGameState;
 
-		//public Text stateText;
+		private GameStateFactory gameStateFactory;
+		private MenuStateEntity gameStateEntity = null;
 
 		[Inject]
 		public void Construct(GameStateFactory gameStateFactory) {
-			_gameStateFactory = gameStateFactory;
+			this.gameStateFactory = gameStateFactory;
 		}
 			
 		private void Start () {
-			ChangeState (GameState.Menu);
+			ChangeState (MenuState.PLAY);
 		}
 		
-		internal void ChangeState(GameState gameState, bool wasClick = false) {
+		internal void ChangeState(MenuState gameState, bool wasClick = false) {
 
 			if (wasClick) {
 
-				if (_gameStateEntity != null) {
-					_gameStateEntity.Dispose ();
-					_gameStateEntity = null;
+				if (gameStateEntity != null) {
+					gameStateEntity.Dispose ();
+					gameStateEntity = null;
 				}
 
-				_previousGameState = _currentGameState;
-				_currentGameState = gameState;
+				previousGameState = currentGameState;
+				currentGameState = gameState;
 
-				//stateText.text = gameState.ToString ();
-
-				_gameStateEntity = _gameStateFactory.CreateState (gameState);
-				_gameStateEntity.Start ();
+				gameStateEntity = gameStateFactory.CreateState (gameState);
+				gameStateEntity.Start ();
 
 			}
 		}
