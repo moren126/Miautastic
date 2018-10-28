@@ -33,7 +33,9 @@ namespace Miautastic.Gameplay {
 			myRigidbody = GetComponent<Rigidbody2D> ();
 			spriteOriginal = GetComponent<SpriteRenderer> ().sprite;
 
+			GetComponent<RectTransform> ().SetParent (GameObject.Find("DropHolder").transform, true);
 			GetComponent<RectTransform> ().anchoredPosition = position;
+			GetComponent<RectTransform> ().localScale = new Vector3 (4f, 4f);
 		}
 			
 		void Update() {
@@ -52,7 +54,7 @@ namespace Miautastic.Gameplay {
 			}
 				
 			if (endPos != null) {
-				Vector2 pos = endPos.GetComponent<RectTransform> ().anchoredPosition/90f; //transform.parent.localPosition / 24f;
+				Vector2 pos = endPos.GetComponent<RectTransform> ().anchoredPosition/90f;
 
 				dropVel = Arrive (pos);
 				myRigidbody.velocity = dropVel;

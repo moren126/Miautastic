@@ -13,14 +13,7 @@ namespace Miautastic.Gameplay {
 		}
 
 		public Drop Create(Vector2 position) {
-			
-			Drop drop = container.InstantiatePrefabResourceForComponent<Drop> ("Prefabs/DropNormal", new object[] {position});
-
-			drop.GetComponent<RectTransform> ().SetParent (GameObject.Find("DropHolder").transform, true);
-			drop.GetComponent<RectTransform> ().anchoredPosition = position;
-			drop.GetComponent<RectTransform> ().localScale = new Vector3 (4f, 4f);
-
-			return drop;
+			return container.InstantiatePrefabResourceForComponent<Drop> ("Prefabs/DropNormal", new object[] {position});
 		}
 
 	}

@@ -9,6 +9,7 @@ namespace Miautastic.Gameplay.Installers {
 			Container.Bind<DropHolder> ().FromComponentInHierarchy ().AsSingle ();
 			Container.Bind<DolphinHolder>().FromComponentInHierarchy ().AsSingle (); 
 
+			Container.Bind<Vector2> ().FromInstance (Vector2.zero);
 			Container.BindFactory<Vector2, Drop, Drop.Factory> ().FromFactory<CustomDropFactory> ();
 	    }
 			
