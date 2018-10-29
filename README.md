@@ -10,4 +10,4 @@ Project uses Unity 2017.3.0, Zenject and TextMesh Pro asset.
 
 Catalog with executable files for Windows systems available down below:
 
-https://my.pcloud.com/publink/show?code=XZJQ397ZTihzyfqnitjFq3rP86E8eSLz7iWX
+https://my.pcloud.com/publink/show?code=XZXI7M7ZBupPTe75Hiy1hoDJLyOsCX7GFaXk

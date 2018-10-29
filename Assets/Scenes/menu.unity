@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 124156845}
   - component: {fileID: 124156844}
   m_Layer: 5
-  m_Name: GameOverButton
+  m_Name: CreditsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -448,7 +448,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445993447}
-        m_MethodName: ChangeToGameOver
+        m_MethodName: ChangeToCredits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -571,7 +571,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445993447}
-        m_MethodName: ChangeToGameplay
+        m_MethodName: ChangeToHelp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 180054890}
   - component: {fileID: 180054889}
   m_Layer: 5
-  m_Name: VictoryButton
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -694,7 +694,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445993447}
-        m_MethodName: ChangeToVictory
+        m_MethodName: ChangeToExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2027,6 +2027,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21876180599495034, guid: 7dae2932e6a5d934285571a86e00a214,
         type: 2}
+    - target: {fileID: 114011655063049126, guid: 7dd34f1803e626c429c9804880b350cd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeToPlay
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dd34f1803e626c429c9804880b350cd, type: 2}
   m_IsPrefabParent: 0

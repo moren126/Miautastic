@@ -39,22 +39,22 @@ namespace Miautastic.Menu.UI {
 		}
 
 		#region Public Methods
-		public void ChangeToMenu() {
+		public void ChangeToPlay() {
 			gameManager.ChangeState (MenuState.PLAY, true);
 		}
 
-		public void ChangeToGameplay() {
+		public void ChangeToHelp() {
 			ShowText("Remove dead mice by left mouse button. Make sure there are not too many of them.");
 			gameManager.ChangeState (MenuState.HELP);
 		}
 
-		public void ChangeToGameOver() {
+		public void ChangeToCredits() {
 			ShowText ("Music used:\n'Tropical Nature of Tiaso' by Umanzuki licensed under\nCC BY-NC-ND 4.0"); 
 			gameManager.ChangeState (MenuState.CREDITS);
 		}
 
-		public void ChangeToVictory() {
-			gameManager.ChangeState (MenuState.EXIT);
+		public void ChangeToExit() {
+			gameManager.ChangeState (MenuState.EXIT, true);
 		}
 
 		public void OKButton() {
