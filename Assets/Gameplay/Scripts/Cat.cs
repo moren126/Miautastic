@@ -18,6 +18,7 @@ namespace Miautastic.Gameplay {
 
 		private float walkCounter;
 		private float dropTime;
+		private float dropTimeDecrease = 0.0002f;
 		private float dropCounter;
 
 		private int walkDirection;
@@ -38,7 +39,7 @@ namespace Miautastic.Gameplay {
 
 			walkCounter = walkTime;
 
-			dropTime = Random.value * 20f;
+			dropTime = Random.value * 10f;
 			dropCounter = dropTime;
 
 			StartWalking ();
@@ -55,6 +56,8 @@ namespace Miautastic.Gameplay {
 			if (GameplayManager.Instance.GameplayState == State.PLAY) {
 
 				dropCounter -= Time.deltaTime;
+
+				dropTime -= dropTimeDecrease;
 
 				if (dropCounter < 0) {
 					gameplayManager.CreateDrop (new Vector2 (transform.position.x, transform.position.y));
@@ -154,7 +157,29 @@ namespace Miautastic.Gameplay {
 
 			return steer;
 		}
+
+		private IEnumerator CloseShooText(float duration) {
+
+			float rate = 1f / duration;
+			float progress = 0;
+
+			gameplayManager.ShooText.gameObject.SetActive (true);
+			gameplayManager.ShooText.rectTransform.anchoredPosition = transform.position;
+
+			while (progress < 1f) {
+				progress += rate * Time.deltaTime;
+				yield return null;
+			}
+				
+			gameplayManager.ShooText.gameObject.SetActive (false);
+		}
 		#endregion
+
+		public void ClickCat() {
+			StopWalking ();
+			StartCoroutine(CloseShooText (2f));
+		}
+			
 	}
 
 }

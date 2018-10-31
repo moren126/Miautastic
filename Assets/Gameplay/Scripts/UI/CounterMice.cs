@@ -7,7 +7,8 @@ namespace Miautastic.Gameplay.UI {
 	public class CounterMice : MonoBehaviour {
 
 		[SerializeField] private TextMeshProUGUI titleText;
-		[SerializeField] private TextMeshProUGUI valueText;
+		[SerializeField] private TextMeshProUGUI valueCurrentText;
+		[SerializeField] private TextMeshProUGUI valueMaxText;
 
 		private Color normalColor = new Color32(255, 255, 255, 255);
 		private Color warningColor = new Color32(199, 0, 57, 255);
@@ -15,8 +16,10 @@ namespace Miautastic.Gameplay.UI {
 		private int criticalValue;
 
 		void Start () {
-			valueText.text = 0.ToString();
-			criticalValue = (int) (0.9 * GameplayManager.Instance.GameOverValue); 
+			valueCurrentText.text = 0.ToString();
+			valueMaxText.text = GameplayManager.Instance.GameOverValue.ToString();
+
+			criticalValue = (int) (0.8 * GameplayManager.Instance.GameOverValue); 
 
 			//protection, because this text element is escaping its position for some reason
 			titleText.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-270f, -20f);
@@ -25,13 +28,15 @@ namespace Miautastic.Gameplay.UI {
 		void Update () {
 			if (GameplayManager.Instance.DropHolder.GetDropCount >= criticalValue) {
 				titleText.color = warningColor;
-				valueText.color = warningColor;
+				valueCurrentText.color = warningColor;
+				valueMaxText.color = warningColor;
 			} else {
 				titleText.color = normalColor;
-				valueText.color = normalColor;
+				valueCurrentText.color = normalColor;
+				valueMaxText.color = normalColor;
 			}
 
-			valueText.text = GameplayManager.Instance.DropHolder.GetDropCount.ToString();
+			valueCurrentText.text = GameplayManager.Instance.DropHolder.GetDropCount.ToString();
 		}
 	}
 

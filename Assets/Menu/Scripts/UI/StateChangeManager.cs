@@ -44,7 +44,7 @@ namespace Miautastic.Menu.UI {
 		}
 
 		public void ChangeToHelp() {
-			ShowText("Remove dead mice by left mouse button. Make sure there are not too many of them.");
+			ShowText("Remove dead mice by left mouse button. Make sure there are not too many of them. You can also click cats to change their course.");
 			gameManager.ChangeState (MenuState.HELP);
 		}
 

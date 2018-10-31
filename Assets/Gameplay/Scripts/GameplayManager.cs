@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Zenject;
+using TMPro;
 
 namespace Miautastic.Gameplay {
 
@@ -10,6 +11,7 @@ namespace Miautastic.Gameplay {
 		[SerializeField] private int gameOverValue = 20;
 		[SerializeField] private AudioSource audioSource;
 		[SerializeField] private Canvas canvasOther;
+		[SerializeField] private TextMeshPro shooText;
 		#endregion
 
 		private DropHolder dropHolder;
@@ -30,6 +32,10 @@ namespace Miautastic.Gameplay {
 
 		public int GameOverValue {
 			get { return gameOverValue; }
+		}
+
+		public TextMeshPro ShooText {
+			get { return shooText; }
 		}
 			
 		public static GameplayManager Instance {
