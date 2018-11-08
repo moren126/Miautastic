@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 using TMPro;
 
@@ -12,18 +12,28 @@ namespace Miautastic.Gameplay {
 		[SerializeField] private AudioSource audioSource;
 		[SerializeField] private Canvas canvasOther;
 		[SerializeField] private TextMeshPro shooText;
+		[SerializeField] private Image blockImage;
 		#endregion
 
+		private GameplayPrefabs gameplayPrefabs;
 		private DropHolder dropHolder;
 		private DolphinHolder dolphinHolder;
 		private Drop.Factory dropfactory;
 		private State gameplayState;
+
+		private float waitTime = 2f;
+		private float timer;
+		private bool timerRunning;
 
 		private static GameplayManager instance;
 
 		#region Properties
 		public State GameplayState {
 			get { return gameplayState; }
+		}
+
+		public GameplayPrefabs GameplayPrefabs {
+			get { return gameplayPrefabs; }
 		}
 			
 		public DropHolder DropHolder {
@@ -49,7 +59,8 @@ namespace Miautastic.Gameplay {
 
 		#region Inject
 		[Inject]
-		private void Construct (DropHolder dropHolder, DolphinHolder dolphinHolder, Drop.Factory dropfactory) {
+		private void Construct (GameplayPrefabs gameplayPrefabs, DropHolder dropHolder, DolphinHolder dolphinHolder, Drop.Factory dropfactory) {
+			this.gameplayPrefabs = gameplayPrefabs;
 			this.dropHolder = dropHolder;
 			this.dolphinHolder = dolphinHolder;
 			this.dropfactory = dropfactory;
@@ -57,22 +68,33 @@ namespace Miautastic.Gameplay {
 		#endregion
 
 		#region MonoBehaviour Methods
-		private void Start() {
+		void Start() {
 			gameplayState = State.PLAY;
 			canvasOther.gameObject.SetActive (false);
+		}
+
+		void Update() {
+			if (timerRunning)
+				ShadersInMotion ();
 		}
 		#endregion
 
 		#region Private Methods
-		private IEnumerator ShadersInMotion(float waitTime) {
+		private void ShadersInMotion() {
 
-			yield return new WaitForSeconds (waitTime);
+			timer += Time.deltaTime;
 
-			CustomImageEffect[] imageEffects = Camera.main.GetComponents<CustomImageEffect> ();
-			foreach (var i in imageEffects)
-				i.enabled = true;
+			if (timer > waitTime) {
+				CustomImageEffect[] imageEffects = Camera.main.GetComponents<CustomImageEffect> ();
+				foreach (var i in imageEffects)
+					i.enabled = true;
 
-			canvasOther.gameObject.SetActive (true);
+				canvasOther.gameObject.SetActive (true);
+
+				timer = 0f;
+				timerRunning = false;
+			}
+
 		}
 
 		private void GameOverActions() {
@@ -83,7 +105,9 @@ namespace Miautastic.Gameplay {
 
 			audioSource.pitch = -0.8f;
 
-			StartCoroutine(ShadersInMotion (2f));
+			blockImage.gameObject.SetActive (true);
+
+			timerRunning = true;
 
 			if (PlayerPrefs.GetInt ("highscore") == 0) {
 				PlayerPrefs.SetInt ("highscore", dropHolder.GetPoints);

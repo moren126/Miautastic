@@ -6,6 +6,7 @@ namespace Miautastic.Gameplay.Installers {
 	public class GameplayInstaller : MonoInstaller<GameplayInstaller> {
 
 		public override void InstallBindings() {
+			Container.Bind<GameplayPrefabs> ().FromComponentInHierarchy ().AsSingle ();
 			Container.Bind<DropHolder> ().FromComponentInHierarchy ().AsSingle ();
 			Container.Bind<DolphinHolder>().FromComponentInHierarchy ().AsSingle (); 
 

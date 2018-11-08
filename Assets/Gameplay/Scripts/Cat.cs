@@ -39,10 +39,11 @@ namespace Miautastic.Gameplay {
 
 			walkCounter = walkTime;
 
-			dropTime = Random.value * 10f;
+			dropTime = Random.Range (2,8);
 			dropCounter = dropTime;
 
 			StartWalking ();
+			StopWalking ();
 
 			if (board != null) {
 				minWalkPoint = board.bounds.min;

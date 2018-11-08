@@ -13,7 +13,8 @@ namespace Miautastic.Gameplay {
 		}
 
 		public Drop Create(Vector2 position) {
-			return container.InstantiatePrefabResourceForComponent<Drop> ("Prefabs/DropNormal", new object[] {position});
+			return container.InstantiatePrefabForComponent<Drop> (GameplayManager.Instance.GameplayPrefabs.DropPrefab, new object[] {position});
+			//return container.InstantiatePrefabResourceForComponent<Drop> ("Prefabs/DropNormal", new object[] {position}); //this is slower
 		}
 
 	}

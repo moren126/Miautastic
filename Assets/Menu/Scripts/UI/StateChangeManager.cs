@@ -49,7 +49,7 @@ namespace Miautastic.Menu.UI {
 		}
 
 		public void ChangeToCredits() {
-			ShowText ("Music used:\n'Tropical Nature of Tiaso' by Umanzuki licensed under\nCC BY-NC-ND 4.0"); 
+			ShowText ("Music used:\n'mint' by Stevia Sphere"); 
 			gameManager.ChangeState (MenuState.CREDITS);
 		}
 

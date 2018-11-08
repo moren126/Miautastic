@@ -22,7 +22,7 @@ namespace Miautastic.Gameplay.UI {
 			criticalValue = (int) (0.8 * GameplayManager.Instance.GameOverValue); 
 
 			//protection, because this text element is escaping its position for some reason
-			titleText.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-270f, -20f);
+			titleText.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-120f, -40f);
 		}
 
 		void Update () {

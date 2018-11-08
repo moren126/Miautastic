@@ -7,6 +7,8 @@ namespace Miautastic.Gameplay {
 
 	public class Drop : MonoBehaviour {
 
+		private float size = 5f;
+		[SerializeField] float sizeDown = 90f;
 		[SerializeField] Sprite spriteHighlighted;
 		[SerializeField] Sprite spriteActivated;
 		private Sprite spriteOriginal;
@@ -24,7 +26,6 @@ namespace Miautastic.Gameplay {
 		public Vector2 position;
 
 		public bool IsActivated {
-			//get { return isActivated; }
 			set { isActivated = value; }
 		}
 			
@@ -35,7 +36,7 @@ namespace Miautastic.Gameplay {
 
 			GetComponent<RectTransform> ().SetParent (GameObject.Find("DropHolder").transform, true);
 			GetComponent<RectTransform> ().anchoredPosition = position;
-			GetComponent<RectTransform> ().localScale = new Vector3 (4f, 4f);
+			GetComponent<RectTransform> ().localScale = new Vector3 (size, size);
 		}
 			
 		void Update() {
@@ -54,7 +55,7 @@ namespace Miautastic.Gameplay {
 			}
 				
 			if (endPos != null) {
-				Vector2 pos = endPos.GetComponent<RectTransform> ().anchoredPosition/90f;
+				Vector2 pos = endPos.GetComponent<RectTransform> ().anchoredPosition/sizeDown;
 
 				dropVel = Arrive (pos);
 				myRigidbody.velocity = dropVel;
